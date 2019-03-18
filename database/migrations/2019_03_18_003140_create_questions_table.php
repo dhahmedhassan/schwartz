@@ -15,6 +15,11 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->integer('form_id')->nullable()->default(2);
+            $table->double('rog_num', 4, 2)->nullable();
+            $table->char('subpart', 2)->nullable();
+            $table->text('body');
+            $table->char('response_type', 5)->default('text');
             $table->timestamps();
         });
     }
