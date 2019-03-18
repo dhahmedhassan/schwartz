@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Questionnaire;
 use Illuminate\Http\Request;
 
+use App\Question;
+
 class QuestionnairesController extends Controller
 {
     /**
@@ -24,7 +26,18 @@ class QuestionnairesController extends Controller
      */
     public function create()
     {
-        //
+
+        $request = request();
+
+        unset($request['_token']);
+
+        $questions = Question::whereIn('id', $request->id)->get();
+
+        // return view('questionnaires.create', compact($request));
+        return view('questionnaires.create')->with([
+            'request' =>$request,
+            'questions' => $questions
+           ]);
     }
 
     /**
