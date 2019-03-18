@@ -48,7 +48,25 @@ class QuestionnairesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $requests = request()->all();
+        unset($requests['_token']);
+
+        // print_r($request);
+        foreach ($requests['answer'] as $key => $value) {
+            // echo $key . "<br>";
+
+            Questionnaire::create([
+                'question_id' => $key,
+                'body' => $value,
+                'user_id' => auth()->user()->id
+            ]);
+            // print_r($key)  ;
+            // echo print_r($value) . "<br>";
+        }
+
+        return redirect()->home();
+        // dd($request);
+        // return $requests;
     }
 
     /**
