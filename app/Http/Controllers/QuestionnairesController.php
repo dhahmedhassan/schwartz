@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Question;
 use App\QuestionnaireDetail;
+use App\Form;
 
 class QuestionnairesController extends Controller
 {
@@ -43,11 +44,8 @@ class QuestionnairesController extends Controller
 
         $request = request();
 
-        unset($request['_token']);
-
         $questions = Question::whereIn('id', $request->id)->get();
 
-        // return view('questionnaires.create', compact($request));
         return view('questionnaires.create')->with([
             'request' =>$request,
             'questions' => $questions
