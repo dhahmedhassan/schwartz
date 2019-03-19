@@ -98,7 +98,15 @@ class QuestionnairesController extends Controller
      */
     public function show(Questionnaire $questionnaire)
     {
-        //
+        $questionnaire = $questionnaire->questionnaire_details;
+        $questions = Question::all();
+        // return $questions;
+        // return $questionnaire;
+
+        return view('questionnaires.show', compact([
+            'questionnaire',
+            'questions'
+            ]));
     }
 
     /**
