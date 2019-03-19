@@ -47,9 +47,17 @@ class FormsController extends Controller
     public function show(Form $form)
     {
 
-        return $form ;
+        // $form_questions = Form::with('questions')->get();
+        $form = Form::where('id', $form->id)
+                                ->with('questions')
+                                ->get();
+
+        // return $form_questions ;
+        // return $form ;
         
-        return view('forms.show', compact('form'));
+        return view('forms.show', compact([
+            'form',
+        ]));
     }
 
     /**
