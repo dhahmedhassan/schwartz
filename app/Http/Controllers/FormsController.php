@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Form;
 use Illuminate\Http\Request;
 
-class FormController extends Controller
+class FormsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +46,10 @@ class FormController extends Controller
      */
     public function show(Form $form)
     {
-        //
+
+        return $form ;
+        
+        return view('forms.show', compact('form'));
     }
 
     /**
