@@ -15,7 +15,13 @@ class CreateQuestionnaireDetailsTable extends Migration
     {
         Schema::create('questionnaire_details', function (Blueprint $table) {
             $table->bigIncrements('id');
+            // $table->integer('user_id')->nullable();
+            $table->integer('questionnaire_id')->nullable();
+            $table->integer('question_id')->nullable();
+            $table->text('body')->nullable();
             $table->timestamps();
+
+            // $table->foreign('questionnaire_id')->references('id')->on('questionnaire'); // ->onDelete('cascade');
         });
     }
 
