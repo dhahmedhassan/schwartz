@@ -22,14 +22,14 @@ class QuestionnairesController extends Controller
     public function index()
     {
         $questionnaires = Questionnaire::with('questionnaire_details')->get();
-        $questions = Question::all();
+        // $questions = Question::all();
         // return $questions;
         // return $questionnaires;s
         // dd($questionnaires);
         // return redirect()->route('questionnaires.index', compact('questionnaires'));
         return view('questionnaires.index', compact([
             'questionnaires',
-            'questions'
+            // 'questions'
             ]));
     }
 
