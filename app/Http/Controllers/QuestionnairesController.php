@@ -6,6 +6,7 @@ use App\Questionnaire;
 use Illuminate\Http\Request;
 
 use App\Question;
+use App\QuestionnaireDetail;
 
 class QuestionnairesController extends Controller
 {
@@ -56,18 +57,25 @@ class QuestionnairesController extends Controller
         unset($requests['_token']);
 
         // print_r($request);
+        Questionnaire::create([
+            'user_id' => auth()->user()->id
+        ]);
+
+        $lastQuestionnaire = Questionnaire::all()->last()->id;
+
         foreach ($requests['answer'] as $key => $value) {
             // echo $key . "<br>";
 
-            Questionnaire::create([
+            QuestionnaireDetail::create([
+                'questionnaire_id' => $lastQuestionnaire,
                 'question_id' => $key,
-                'body' => $value,
-                'user_id' => auth()->user()->id
+                'body' => $value,                
             ]);
             // print_r($key)  ;
             // echo print_r($value) . "<br>";
         }
 
+        // $request->session()->flash('success', 'New Questionnaire Has been created!');
         return redirect()->home();
         // dd($request);
         // return $requests;
